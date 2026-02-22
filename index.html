@@ -155,10 +155,11 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('images/hero.jpg');
+            background-image: url('images/풍경11.jpeg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            z-index: 1;
         }
 
         .hero-overlay {
@@ -374,26 +375,48 @@
 
         /* ===== Gallery Section ===== */
         .gallery-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .gallery-grid::-webkit-scrollbar-thumb {
+            background: #d1ccbd;
+            border-radius: 4px;
+        }
+
+        .gallery-grid::-webkit-scrollbar-thumb:hover {
+            background: #a9a390;
         }
 
         .gallery-item {
+            flex: 0 0 auto;
+            width: 80vw;
+            max-width: 400px;
+            height: 300px;
             border-radius: 12px;
             overflow: hidden;
-            position: relative;
-            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            scroll-snap-align: center;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 320px;
+            height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease, filter 0.6s ease;
+            transition: transform 0.5s ease;
         }
 
         .gallery-item:hover img {
@@ -401,26 +424,15 @@
             filter: brightness(1.05);
         }
 
-        .gallery-item:first-child {
-            grid-column: span 2;
-        }
-
-        .gallery-item:first-child img {
-            height: 400px;
-        }
-
         @media (max-width: 768px) {
             .gallery-grid {
-                grid-template-columns: 1fr;
+                padding: 0 24px 20px;
+                /* Add padding for mobile to show scroll hints */
             }
 
-            .gallery-item:first-child {
-                grid-column: span 1;
-            }
-
-            .gallery-item img,
-            .gallery-item:first-child img {
-                height: 260px;
+            .gallery-item {
+                width: 90vw;
+                height: 240px;
             }
         }
 
@@ -786,7 +798,7 @@
     <section class="section story" id="story">
         <div class="story-grid">
             <div class="story-img reveal">
-                <img src="images/story.jpg" alt="카페 작은 숲 인테리어 - 넓고 쾌적한 전경">
+                <img src="images/실내11.jpeg" alt="카페 작은 숲 인테리어 - 넓고 쾌적한 전경">
             </div>
             <div class="story-text reveal">
                 <h2 class="font-serif">번잡함에서 멀어진,<br />고요한 피난처</h2>
@@ -811,25 +823,52 @@
             <h2 class="section-title font-serif">작은 숲의 풍경</h2>
             <div class="divider" style="margin-top: 16px;"></div>
         </div>
-        <div class="gallery-grid">
-            <div class="gallery-item reveal">
-                <img src="images/terrace1.jpeg" alt="카페 작은 숲 야외 테라스 - 싱그러운 정원">
+
+        <div style="position: relative; width: 100%;">
+            <!-- Left/Right scroll hints -->
+            <div
+                style="position: absolute; top: 50%; left: 0px; width: 40px; height: 100%; transform: translateY(-50%); background: linear-gradient(90deg, #FAFAFA 0%, transparent 100%); z-index: 2; pointer-events: none;">
             </div>
-            <div class="gallery-item reveal">
-                <img src="images/gallery_night.jpg" alt="카페 작은 숲 테라스 - 은은한 야경">
+            <div
+                style="position: absolute; top: 50%; right: 0px; width: 40px; height: 100%; transform: translateY(-50%); background: linear-gradient(-90deg, #FAFAFA 0%, transparent 100%); z-index: 2; pointer-events: none;">
             </div>
-            <div class="gallery-item reveal">
-                <img src="images/gallery_winter.jpg" alt="카페 작은 숲 전경 - 고요한 설경">
+
+            <div class="gallery-grid" id="dynamicGalleryGrid">
+                <div class="gallery-item reveal">
+                    <img src="images/풍경10.jpeg" alt="카페 작은 숲 풍경">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="images/풍경11.jpeg" alt="카페 작은 숲 풍경">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="images/풍경12.jpeg" alt="카페 작은 숲 풍경">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="images/풍경13.jpeg" alt="카페 작은 숲 풍경">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="images/풍경15.jpeg" alt="카페 작은 숲 풍경">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="images/기타10.jpeg" alt="카페 작은 숲 분위기">
+                </div>
+                <!-- Dynamic images will be appended here -->
             </div>
-            <div class="gallery-item reveal">
-                <img src="images/gallery_autumn.jpg" alt="카페 작은 숲 내부 - 창밖의 단풍 풍경">
-            </div>
-            <div class="gallery-item reveal">
-                <img src="images/interior5.jpeg" alt="카페 작은 숲 감성 - 빈티지 장식">
-            </div>
-            <div class="gallery-item reveal">
-                <img src="images/terrace2.jpeg" alt="카페 작은 숲 야외 정원">
-            </div>
+        </div>
+
+        <!-- Admin Upload UI (Hidden by default) -->
+        <div id="adminGalleryUpload" style="display: none; text-align: center; margin-top: 3rem;">
+            <label for="galleryUploadInput" class="btn-secondary" id="uploadLabel"
+                style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                </svg>
+                갤러리 이미지 업로드 (모두에게 보임)
+            </label>
+            <input type="file" id="galleryUploadInput" accept="image/*" style="display: none;">
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px;">
+                ※ 업로드 시 Vercel 클라우드를 통해 웹사이트를 방문하는 모두에게 표시됩니다.
+            </p>
         </div>
     </section>
 
@@ -849,10 +888,11 @@
                 </div>
             </div>
             <div class="story-img reveal" style="order: 1; position: relative;">
-                <img src="images/pet1.jpg" alt="카페에서 휴식 중인 반려견" style="height: 480px; width: 100%; object-fit: cover;">
+                <img src="images/강아지10.jpeg" alt="카페에서 휴식 중인 반려견"
+                    style="height: 480px; width: 100%; object-fit: cover;">
                 <div
                     style="position: absolute; bottom: 20px; right: 20px; width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                    <img src="images/pet2.jpg" alt="반려견 근접 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="images/강아지11.jpeg" alt="반려견 근접 사진" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -889,7 +929,7 @@
                     </div>
                     <div class="reveal"
                         style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-                        <img src="images/food1.jpg" alt="시그니처 디저트"
+                        <img src="images/음식11.jpeg" alt="시그니처 디저트"
                             style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
@@ -935,7 +975,7 @@
                     </div>
                     <div class="reveal"
                         style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-top: 10px;">
-                        <img src="images/food2.jpg" alt="커피 음료" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="images/음식12.jpeg" alt="커피 음료" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -1081,7 +1121,119 @@
             });
         }, { threshold: 0.15 });
         revealElements.forEach(el => observer.observe(el));
+
+        // --- Admin Gallery Upload Feature (Vercel Serverless & GitHub) ---
+        const footerLogo = document.querySelector('.footer-logo');
+        const adminUploadUI = document.getElementById('adminGalleryUpload');
+        const galleryGrid = document.getElementById('dynamicGalleryGrid');
+        const fileInput = document.getElementById('galleryUploadInput');
+        const uploadLabel = document.getElementById('uploadLabel');
+        let logoClicks = 0;
+        let adminTimer;
+
+        // Hidden Admin Toggle (Click footer logo 3 times)
+        footerLogo.style.cursor = 'pointer';
+        footerLogo.addEventListener('click', () => {
+            logoClicks++;
+            clearTimeout(adminTimer);
+            adminTimer = setTimeout(() => logoClicks = 0, 1000);
+
+            if (logoClicks >= 3) {
+                const isCurrentlyAdmin = adminUploadUI.style.display === 'block';
+                adminUploadUI.style.display = isCurrentlyAdmin ? 'none' : 'block';
+                logoClicks = 0;
+            }
+        });
+
+        // Load images from backend API
+        async function loadImagesFromCloud() {
+            try {
+                const response = await fetch('/api/images');
+                if (!response.ok) return; // Silent fail if local without running vercel
+
+                const urls = await response.json();
+
+                urls.forEach((url, index) => {
+                    // Prevent rendering local duplicate if it exists
+                    if (!url.includes('images/gallery')) return;
+
+                    const div = document.createElement('div');
+                    div.className = `gallery-item reveal`;
+                    div.innerHTML = `<img src="${url}" alt="클라우드 업로드 갤러리 이미지">`;
+                    galleryGrid.appendChild(div);
+                    observer.observe(div);
+                });
+            } catch (e) {
+                console.log('클라우드 이미지 로딩 무시 (로컬 환경일 수 있음)');
+            }
+        }
+
+        // Handle Image Upload
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('이미지 파일만 업로드 가능합니다.');
+                return;
+            }
+
+            // UI Feedback
+            const originalText = uploadLabel.innerHTML;
+            uploadLabel.innerHTML = '업로드 중... (서버 처리 중)';
+            uploadLabel.style.opacity = '0.7';
+            uploadLabel.style.pointerEvents = 'none';
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const base64String = event.target.result;
+
+                try {
+                    const res = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            imageBase64: base64String,
+                            filename: file.name.replace(/[^a-zA-Z0-9.\-_]/g, '') // Sanitize filename
+                        })
+                    });
+
+                    if (!res.ok) {
+                        const error = await res.json();
+                        throw new Error(error.error || '업로드 실패');
+                    }
+
+                    const data = await res.json();
+
+                    // Add to UI immediately
+                    const div = document.createElement('div');
+                    div.className = `gallery-item reveal visible`;
+                    div.innerHTML = `<img src="${data.url}" alt="방금 추가된 갤러리 이미지">`;
+                    galleryGrid.appendChild(div);
+
+                    // Scroll to the new item
+                    div.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'end' });
+
+                    alert('성공적으로 글로벌 업로드 되었습니다! 모든 방문자에게 보입니다.');
+
+                } catch (err) {
+                    alert('업로드 중 오류가 발생했습니다: ' + err.message);
+                } finally {
+                    // Restore UI
+                    uploadLabel.innerHTML = originalText;
+                    uploadLabel.style.opacity = '1';
+                    uploadLabel.style.pointerEvents = 'auto';
+                    fileInput.value = '';
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        // Initialize fetching cloud images
+        loadImagesFromCloud();
     </script>
 </body>
 
 </html>
+```
