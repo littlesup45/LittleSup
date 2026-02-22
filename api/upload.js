@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
     const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
     const token = process.env.GITHUB_TOKEN;
-    const owner = 'uzzano-info';
+    const owner = 'littlesup45';
     const repo = 'LittleSup';
     const path = `images/gallery/${Date.now()}_${filename}`;
 

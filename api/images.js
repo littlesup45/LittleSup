@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-    const owner = 'uzzano-info';
+    const owner = 'littlesup45';
     const repo = 'LittleSup';
     const path = `images/gallery`;
     const token = process.env.GITHUB_TOKEN;
