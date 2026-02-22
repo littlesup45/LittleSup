@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카페 작은 숲 | 남한산성 숲 속의 조용한 디저트 카페</title>
     <meta name="description" content="남한산성 숲 속에서 조용하게 독서와 명상을 즐길 수 있는 유럽 가정집 감성 카페. 매장에서 직접 만든 수제 디저트와 차를 판매합니다.">
+    <!-- Open Graph SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="카페 작은 숲 | 남한산성 숲 속의 감성 카페">
+    <meta property="og:description" content="조용하게 독서와 명상을 즐길 수 있는 유럽 가정집 감성 카페. 수제 디저트와 차.">
+    <meta property="og:image" content="https://littlesup.vercel.app/images/hero.jpg">
+    <meta property="og:url" content="https://littlesup.vercel.app/">
+
 
     <!-- Fonts -->
     <link rel="stylesheet" as="style" crossorigin
@@ -155,7 +162,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('images/풍경11.jpeg');
+            background-image: url('images/landscape_11.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -752,7 +759,99 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 1001;
+        }
+        .lightbox-close:hover {
+            color: #d1ccbd;
+        }
+
+        /* ===== FAB (Floating Action Button) ===== */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 90;
+        }
+        .fab {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--forest);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .fab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--forest-dark);
+        }
+        .fab-top {
+            opacity: 0;
+            pointer-events: none;
+            background-color: rgba(28, 41, 32, 0.8);
+        }
+        .fab-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .fab-ig {
+            background-color: #E1306C;
+        }
+        .fab-ig:hover {
+            background-color: #C13584;
+        }
     </style>
+
 </head>
 
 <body>
@@ -798,7 +897,7 @@
     <section class="section story" id="story">
         <div class="story-grid">
             <div class="story-img reveal">
-                <img src="images/실내11.jpeg" alt="카페 작은 숲 인테리어 - 넓고 쾌적한 전경">
+                <img loading="lazy" src="images/interior_11.jpg" alt="카페 작은 숲 인테리어 - 넓고 쾌적한 전경">
             </div>
             <div class="story-text reveal">
                 <h2 class="font-serif">번잡함에서 멀어진,<br />고요한 피난처</h2>
@@ -835,55 +934,55 @@
 
             <div class="gallery-grid" id="dynamicGalleryGrid">
                 <div class="gallery-item reveal">
-                    <img src="images2/풍경10.jpeg" alt="카페 작은 숲 풍경">
+                    <img loading="lazy" src="images2/landscape_10.jpg" alt="카페 작은 숲 풍경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/풍경11.jpeg" alt="카페 작은 숲 풍경">
+                    <img loading="lazy" src="images2/landscape_11.jpg" alt="카페 작은 숲 풍경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/풍경12.jpeg" alt="카페 작은 숲 풍경">
+                    <img loading="lazy" src="images2/landscape_12.jpg" alt="카페 작은 숲 풍경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/풍경13.jpeg" alt="카페 작은 숲 풍경">
+                    <img loading="lazy" src="images2/landscape_13.jpg" alt="카페 작은 숲 풍경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/풍경15.jpeg" alt="카페 작은 숲 풍경">
+                    <img loading="lazy" src="images2/landscape_15.jpg" alt="카페 작은 숲 풍경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/기타10.jpeg" alt="카페 작은 숲 분위기">
+                    <img loading="lazy" src="images2/etc_10.jpg" alt="카페 작은 숲 분위기">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/exterior1.jpeg" alt="카페 작은 숲 외관">
+                    <img loading="lazy" src="images2/exterior1.jpg" alt="카페 작은 숲 외관">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/exterior_winter1.jpeg" alt="카페 작은 숲 겨울 외관">
+                    <img loading="lazy" src="images2/exterior_winter1.jpg" alt="카페 작은 숲 겨울 외관">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/interior10.jpeg" alt="카페 작은 숲 실내 전경">
+                    <img loading="lazy" src="images2/interior10.jpg" alt="카페 작은 숲 실내 전경">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/interior11.jpeg" alt="카페 작은 숲 실내 분위기">
+                    <img loading="lazy" src="images2/interior11.jpg" alt="카페 작은 숲 실내 분위기">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/terrace1.jpeg" alt="카페 작은 숲 테라스">
+                    <img loading="lazy" src="images2/terrace1.jpg" alt="카페 작은 숲 테라스">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/terrace2.jpeg" alt="카페 작은 숲 야외 테라스">
+                    <img loading="lazy" src="images2/terrace2.jpg" alt="카페 작은 숲 야외 테라스">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/음식13.jpeg" alt="카페 작은 숲 디저트">
+                    <img loading="lazy" src="images2/food_13.jpg" alt="카페 작은 숲 디저트">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/음식14.jpeg" alt="카페 작은 숲 메뉴">
+                    <img loading="lazy" src="images2/food_14.jpg" alt="카페 작은 숲 메뉴">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/음식17.jpeg" alt="카페 작은 숲 달콤한 디저트">
+                    <img loading="lazy" src="images2/food_17.jpg" alt="카페 작은 숲 달콤한 디저트">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/음식18.jpeg" alt="카페 작은 숲 정성스런 메뉴">
+                    <img loading="lazy" src="images2/food_18.jpg" alt="카페 작은 숲 정성스런 메뉴">
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="images2/gallery_autumn.jpg" alt="카페 작은 숲 가을 풍경"
+                    <img loading="lazy" src="images2/gallery_autumn.jpg" alt="카페 작은 숲 가을 풍경"
                         onerror="this.parentElement.style.display='none'">
                 </div>
                 <!-- Dynamic images will be appended here -->
@@ -922,11 +1021,11 @@
                 </div>
             </div>
             <div class="story-img reveal" style="order: 1; position: relative;">
-                <img src="images/강아지10.jpeg" alt="카페에서 휴식 중인 반려견"
+                <img loading="lazy" src="images/dog_10.jpg" alt="카페에서 휴식 중인 반려견"
                     style="height: 480px; width: 100%; object-fit: cover;">
                 <div
                     style="position: absolute; bottom: 20px; right: 20px; width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                    <img src="images/강아지11.jpeg" alt="반려견 근접 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" src="images/dog_11.jpg" alt="반려견 근접 사진" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -963,7 +1062,7 @@
                     </div>
                     <div class="reveal"
                         style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-                        <img src="images/음식11.jpeg" alt="시그니처 디저트"
+                        <img loading="lazy" src="images/food_11.jpg" alt="시그니처 디저트"
                             style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
@@ -1009,7 +1108,7 @@
                     </div>
                     <div class="reveal"
                         style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-top: 10px;">
-                        <img src="images/음식12.jpeg" alt="커피 음료" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" src="images/food_12.jpg" alt="커피 음료" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -1110,7 +1209,7 @@
             </div>
 
             <div class="visit-map reveal">
-                <img src="images/naver_map.png" alt="카페 작은 숲 네이버 지도 위치" style="filter: none; opacity: 1;">
+                <img loading="lazy" src="images/naver_map.png" alt="카페 작은 숲 네이버 지도 위치" style="filter: none; opacity: 1;">
                 <div class="visit-map-overlay" style="background: rgba(46, 71, 51, 0.1);">
                     <a href="https://naver.me/xFLA2UGz" target="_blank" class="visit-map-btn">
                         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
@@ -1137,7 +1236,29 @@
         </div>
     </footer>
 
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <a href="https://www.instagram.com/c.littlesup" target="_blank" class="fab fab-ig" aria-label="Instagram 문의">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+        </a>
+        <div class="fab fab-top" id="fab-top" aria-label="맨 위로" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+        </div>
+    </div>
+
     <!-- Scripts -->
+
     <script>
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
@@ -1242,7 +1363,7 @@
                     // Add to UI immediately
                     const div = document.createElement('div');
                     div.className = `gallery-item reveal visible`;
-                    div.innerHTML = `<img src="${data.url}" alt="방금 추가된 갤러리 이미지">`;
+                    div.innerHTML = `<img loading="lazy" src="${data.url}" alt="방금 추가된 갤러리 이미지">`;
                     galleryGrid.appendChild(div);
 
                     // Scroll to the new item
@@ -1266,7 +1387,55 @@
 
         // Initialize fetching cloud images
         loadImagesFromCloud();
+
+        // --- Lightbox & FAB Logic ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const fabTop = document.getElementById('fab-top');
+        
+        // Open lightbox on gallery image click
+        document.getElementById('dynamicGalleryGrid').addEventListener('click', function(e) {
+            if(e.target.tagName === 'IMG') {
+                lightbox.style.display = 'flex';
+                // Trigger reflow
+                void lightbox.offsetWidth;
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+            }
+        });
+        
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                if(!lightbox.classList.contains('active')) {
+                    lightbox.style.display = 'none';
+                }
+            }, 300);
+        }
+        
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if(e.target !== lightboxImg) {
+                closeLightbox();
+            }
+        });
+        
+        // Cursor indicating zoom
+        document.querySelector('.gallery-grid').style.cursor = 'zoom-in';
+        lightbox.style.display = 'none';
+        
+        // FAB Scroll Logic
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                fabTop.classList.add('visible');
+            } else {
+                fabTop.classList.remove('visible');
+            }
+        });
     </script>
+
 </body>
 
 </html>
